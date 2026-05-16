@@ -39,33 +39,62 @@ $csrf_token = generate_csrf_token();
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login Admin - DurianCare Expert</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../assets/css/style.css">
     <style>
-        body { font-family: 'Poppins', sans-serif; }
+        body {
+            background-color: var(--gray-100);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+        }
+        .login-card {
+            background-color: white;
+            padding: 2rem;
+            border-radius: 0.75rem;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+            width: 100%;
+            max-width: 28rem;
+        }
+        .login-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            text-align: center;
+            color: var(--primary);
+            margin-bottom: 1.5rem;
+        }
+        .alert-danger {
+            background-color: #fee2e2;
+            border: 1px solid #f87171;
+            color: #991b1b;
+            padding: 0.75rem 1rem;
+            border-radius: 0.5rem;
+            margin-bottom: 1rem;
+            font-size: 0.875rem;
+        }
     </style>
 </head>
-<body class="bg-gray-100 flex items-center justify-center min-h-screen">
-    <div class="bg-white p-8 rounded-xl shadow-md w-full max-w-md">
-        <h1 class="text-2xl font-bold text-center text-green-800 mb-6">DurianCare Admin</h1>
+<body>
+    <div class="login-card">
+        <h1 class="login-title">DurianCare Admin</h1>
 
         <?php if ($error): ?>
-            <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded mb-4">
+            <div class="alert-danger">
                 <?= $error ?>
             </div>
         <?php endif; ?>
 
         <form action="" method="POST">
             <input type="hidden" name="csrf_token" value="<?= $csrf_token ?>">
-            <div class="mb-4">
-                <label class="block text-gray-700 text-sm font-bold mb-2" for="username">Username</label>
-                <input class="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500" type="text" name="username" id="username" required>
+            <div class="form-group">
+                <label class="form-label" for="username">Username</label>
+                <input class="form-control" type="text" name="username" id="username" required>
             </div>
-            <div class="mb-6">
-                <label class="block text-gray-700 text-sm font-bold mb-2" for="password">Password</label>
-                <input class="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500" type="password" name="password" id="password" required>
+            <div class="form-group">
+                <label class="form-label" for="password">Password</label>
+                <input class="form-control" type="password" name="password" id="password" required>
             </div>
-            <button class="w-full bg-green-700 text-white font-bold py-2 px-4 rounded-lg hover:bg-green-800 transition duration-300" type="submit">
+            <button class="btn btn-primary btn-full" type="submit" style="margin-top: 1rem;">
                 Login
             </button>
         </form>
