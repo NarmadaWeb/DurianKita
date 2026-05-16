@@ -13,60 +13,147 @@ if (!is_admin_logged_in()) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Admin Dashboard - DurianCare Expert</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="../assets/css/style.css">
     <style>
-        body { font-family: 'Poppins', sans-serif; }
-        .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24; }
+        /* Admin specific overrides */
+        body {
+            background-color: var(--gray-100);
+            display: flex;
+            min-height: 100vh;
+        }
+        .admin-sidebar {
+            width: 16rem;
+            background-color: var(--primary-dark);
+            color: white;
+            position: fixed;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            overflow-y: auto;
+            z-index: 50;
+        }
+        .admin-sidebar-header {
+            padding: 1.5rem;
+        }
+        .admin-sidebar-header h1 {
+            font-size: 1.25rem;
+            font-weight: 700;
+        }
+        .admin-nav {
+            flex-grow: 1;
+            padding: 0 1rem;
+        }
+        .admin-nav-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+        .admin-nav-link {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            padding: 0.75rem 1rem;
+            border-radius: 0.5rem;
+            color: white;
+            text-decoration: none;
+            transition: background-color 0.2s;
+        }
+        .admin-nav-link:hover {
+            background-color: var(--primary);
+        }
+        .admin-nav-link.active {
+            background-color: var(--primary);
+        }
+        .admin-sidebar-footer {
+            padding: 1rem;
+            border-top: 1px solid #065f46;
+        }
+        .logout-link {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            padding: 0.75rem 1rem;
+            border-radius: 0.5rem;
+            color: #fecaca;
+            text-decoration: none;
+        }
+        .logout-link:hover {
+            background-color: #b91c1c;
+            color: white;
+        }
+        .admin-main {
+            flex-grow: 1;
+            margin-left: 16rem;
+            padding: 2rem;
+            width: calc(100% - 16rem);
+        }
+        .alert {
+            padding: 1rem;
+            border-radius: 0.5rem;
+            margin-bottom: 1.5rem;
+            border: 1px solid transparent;
+        }
+        .alert-success {
+            background-color: #d1fae5;
+            border-color: #34d399;
+            color: #065f46;
+        }
+        .alert-danger {
+            background-color: #fee2e2;
+            border-color: #f87171;
+            color: #991b1b;
+        }
     </style>
 </head>
-<body class="bg-gray-100 flex min-h-screen">
+<body>
     <!-- Sidebar -->
-    <aside class="bg-green-900 text-white w-64 fixed h-full flex flex-col overflow-y-auto z-50">
-        <div class="p-6">
-            <h1 class="text-xl font-bold">DurianCare Admin</h1>
+    <aside class="admin-sidebar">
+        <div class="admin-sidebar-header">
+            <h1>DurianCare Admin</h1>
         </div>
-        <nav class="flex-grow px-4">
-            <ul class="space-y-2">
+        <nav class="admin-nav">
+            <ul class="admin-nav-list">
                 <li>
-                    <a href="index.php" class="flex items-center gap-3 px-4 py-3 rounded-lg <?= basename($_SERVER['PHP_SELF']) == 'index.php' ? 'bg-green-700' : 'hover:bg-green-800' ?>">
+                    <a href="index.php" class="admin-nav-link <?= basename($_SERVER['PHP_SELF']) == 'index.php' ? 'active' : '' ?>">
                         <span class="material-symbols-outlined">dashboard</span> Dashboard
                     </a>
                 </li>
                 <li>
-                    <a href="manage_diseases.php" class="flex items-center gap-3 px-4 py-3 rounded-lg <?= basename($_SERVER['PHP_SELF']) == 'manage_diseases.php' ? 'bg-green-700' : 'hover:bg-green-800' ?>">
+                    <a href="manage_diseases.php" class="admin-nav-link <?= basename($_SERVER['PHP_SELF']) == 'manage_diseases.php' ? 'active' : '' ?>">
                         <span class="material-symbols-outlined">coronavirus</span> Kelola Penyakit
                     </a>
                 </li>
                 <li>
-                    <a href="manage_symptoms.php" class="flex items-center gap-3 px-4 py-3 rounded-lg <?= basename($_SERVER['PHP_SELF']) == 'manage_symptoms.php' ? 'bg-green-700' : 'hover:bg-green-800' ?>">
+                    <a href="manage_symptoms.php" class="admin-nav-link <?= basename($_SERVER['PHP_SELF']) == 'manage_symptoms.php' ? 'active' : '' ?>">
                         <span class="material-symbols-outlined">conditions</span> Kelola Gejala
                     </a>
                 </li>
                 <li>
-                    <a href="manage_rules.php" class="flex items-center gap-3 px-4 py-3 rounded-lg <?= basename($_SERVER['PHP_SELF']) == 'manage_rules.php' ? 'bg-green-700' : 'hover:bg-green-800' ?>">
+                    <a href="manage_rules.php" class="admin-nav-link <?= basename($_SERVER['PHP_SELF']) == 'manage_rules.php' ? 'active' : '' ?>">
                         <span class="material-symbols-outlined">account_tree</span> Basis Aturan
                     </a>
                 </li>
                 <li>
-                    <a href="manage_history.php" class="flex items-center gap-3 px-4 py-3 rounded-lg <?= basename($_SERVER['PHP_SELF']) == 'manage_history.php' ? 'bg-green-700' : 'hover:bg-green-800' ?>">
+                    <a href="manage_history.php" class="admin-nav-link <?= basename($_SERVER['PHP_SELF']) == 'manage_history.php' ? 'active' : '' ?>">
                         <span class="material-symbols-outlined">history</span> Riwayat Diagnosa
                     </a>
                 </li>
             </ul>
         </nav>
-        <div class="p-4 border-t border-green-800">
-            <a href="logout.php" class="flex items-center gap-3 px-4 py-3 rounded-lg hover:bg-red-700 text-red-200">
+        <div class="admin-sidebar-footer">
+            <a href="logout.php" class="logout-link">
                 <span class="material-symbols-outlined">logout</span> Keluar
             </a>
         </div>
     </aside>
 
     <!-- Main Content -->
-    <main class="flex-grow ml-64 p-8">
+    <main class="admin-main">
         <?php if (isset($_SESSION['message'])): ?>
-            <div class="bg-<?= $_SESSION['message_type'] == 'success' ? 'green' : 'red' ?>-100 border border-<?= $_SESSION['message_type'] == 'success' ? 'green' : 'red' ?>-400 text-<?= $_SESSION['message_type'] == 'success' ? 'green' : 'red' ?>-700 px-4 py-3 rounded mb-6">
+            <div class="alert alert-<?= $_SESSION['message_type'] == 'success' ? 'success' : 'danger' ?>">
                 <?= $_SESSION['message'] ?>
                 <?php unset($_SESSION['message'], $_SESSION['message_type']); ?>
             </div>
