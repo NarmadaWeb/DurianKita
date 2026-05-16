@@ -98,6 +98,13 @@ $csrf_token = generate_csrf_token();
                 Login
             </button>
         </form>
+
+        <div style="margin-top: 1.5rem; text-align: center;">
+            <a href="../index.php" style="display: inline-flex; align-items: center; gap: 0.5rem; color: var(--gray-500); text-decoration: none; font-size: 0.875rem;">
+                <span class="material-symbols-outlined" style="font-size: 1.25rem;">arrow_back</span>
+                Kembali ke Beranda
+            </a>
+        </div>
     </div>
 </body>
 </html>
