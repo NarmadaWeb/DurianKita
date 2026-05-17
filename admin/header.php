@@ -23,7 +23,7 @@ if (!is_admin_logged_in()) {
         }
         .admin-sidebar {
             width: 16rem;
-            background-color: var(--primary-dark);
+            background-color: #064e3b;
             color: white;
             position: fixed;
             height: 100vh;
@@ -31,13 +31,18 @@ if (!is_admin_logged_in()) {
             flex-direction: column;
             overflow-y: auto;
             z-index: 50;
+            box-shadow: 4px 0 10px rgba(0,0,0,0.1);
         }
         .admin-sidebar-header {
-            padding: 1.5rem;
+            padding: 2rem 1.5rem;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+            margin-bottom: 1rem;
         }
         .admin-sidebar-header h1 {
             font-size: 1.25rem;
-            font-weight: 700;
+            font-weight: 800;
+            letter-spacing: -0.025em;
+            color: white;
         }
         .admin-nav {
             flex-grow: 1;
@@ -55,17 +60,32 @@ if (!is_admin_logged_in()) {
             display: flex;
             align-items: center;
             gap: 0.75rem;
-            padding: 0.75rem 1rem;
-            border-radius: 0.5rem;
-            color: white;
+            padding: 0.875rem 1rem;
+            border-radius: 0.75rem;
+            color: rgba(255, 255, 255, 0.8) !important;
             text-decoration: none;
-            transition: background-color 0.2s;
+            transition: all 0.2s;
+            font-weight: 500;
+        }
+        .admin-nav-link .material-symbols-outlined {
+            color: rgba(255, 255, 255, 0.6);
+            transition: color 0.2s;
         }
         .admin-nav-link:hover {
-            background-color: var(--primary);
+            background-color: rgba(255, 255, 255, 0.1);
+            color: white !important;
+        }
+        .admin-nav-link:hover .material-symbols-outlined {
+            color: white;
         }
         .admin-nav-link.active {
-            background-color: var(--primary);
+            background-color: var(--secondary);
+            color: white !important;
+            font-weight: 700;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+        }
+        .admin-nav-link.active .material-symbols-outlined {
+            color: white;
         }
         .admin-sidebar-footer {
             padding: 1rem;

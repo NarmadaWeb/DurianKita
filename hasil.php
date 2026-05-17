@@ -110,6 +110,27 @@ if (!empty($selected_symptom_ids)) {
                                     <p style="color: var(--primary);"><?= htmlspecialchars($disease['solution']) ?></p>
                                 </div>
                             </div>
+
+                            <div style="margin-top: 2.5rem; display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.5rem;">
+                                <div class="result-detail-card">
+                                    <div class="detail-icon detail-icon-prevention">
+                                        <span class="material-symbols-outlined">shield_check</span>
+                                    </div>
+                                    <h3 style="font-weight: 700; color: var(--gray-900); margin-bottom: 0.75rem;">Pencegahan</h3>
+                                    <div class="detail-content">
+                                        <?= nl2br(htmlspecialchars($disease['prevention'] ?? 'Data tidak tersedia.')) ?>
+                                    </div>
+                                </div>
+                                <div class="result-detail-card">
+                                    <div class="detail-icon detail-icon-maintenance">
+                                        <span class="material-symbols-outlined">track_changes</span>
+                                    </div>
+                                    <h3 style="font-weight: 700; color: var(--gray-900); margin-bottom: 0.75rem;">Perawatan</h3>
+                                    <div class="detail-content">
+                                        <?= nl2br(htmlspecialchars($disease['maintenance'] ?? 'Data tidak tersedia.')) ?>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     <?php else: ?>
                         <div class="card text-center" style="padding: 3rem; border: 2px solid var(--gray-300);">

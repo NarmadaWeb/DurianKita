@@ -16,63 +16,81 @@ $count_history = $stmt->fetchColumn();
 ?>
 
 <div class="mb-8">
-    <h2 class="text-2xl font-bold text-green-900">Dashboard Overview</h2>
-    <p class="text-gray-600">Selamat datang di panel admin sistem pakar DurianCare.</p>
+    <h2 class="text-3xl font-extrabold text-gray-900 tracking-tight">Dashboard Overview</h2>
+    <p class="text-gray-500 mt-1">Selamat datang di panel kendali DurianCare Expert.</p>
 </div>
 
-<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
-    <div class="bg-white p-6 rounded-xl shadow-sm border border-gray-200">
-        <div class="flex justify-between items-start mb-4">
-            <h3 class="text-gray-500 text-sm font-semibold uppercase">Penyakit</h3>
-            <span class="material-symbols-outlined text-green-600">coronavirus</span>
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-12">
+    <div class="bg-white p-8 rounded-2xl shadow-sm border border-gray-100 hover:shadow-md transition-shadow">
+        <div class="flex justify-between items-start mb-6">
+            <div class="p-3 bg-green-50 rounded-xl">
+                <span class="material-symbols-outlined text-green-700">coronavirus</span>
+            </div>
+            <span class="text-xs font-bold text-gray-400 uppercase tracking-wider">Penyakit</span>
         </div>
-        <p class="text-3xl font-bold text-gray-800"><?= $count_diseases ?></p>
+        <p class="text-4xl font-black text-gray-900"><?= $count_diseases ?></p>
     </div>
-    <div class="bg-white p-6 rounded-xl shadow-sm border border-gray-200">
-        <div class="flex justify-between items-start mb-4">
-            <h3 class="text-gray-500 text-sm font-semibold uppercase">Gejala</h3>
-            <span class="material-symbols-outlined text-green-600">conditions</span>
+    <div class="bg-white p-8 rounded-2xl shadow-sm border border-gray-100 hover:shadow-md transition-shadow">
+        <div class="flex justify-between items-start mb-6">
+            <div class="p-3 bg-blue-50 rounded-xl">
+                <span class="material-symbols-outlined text-blue-700">conditions</span>
+            </div>
+            <span class="text-xs font-bold text-gray-400 uppercase tracking-wider">Gejala</span>
         </div>
-        <p class="text-3xl font-bold text-gray-800"><?= $count_symptoms ?></p>
+        <p class="text-4xl font-black text-gray-900"><?= $count_symptoms ?></p>
     </div>
-    <div class="bg-white p-6 rounded-xl shadow-sm border border-gray-200">
-        <div class="flex justify-between items-start mb-4">
-            <h3 class="text-gray-500 text-sm font-semibold uppercase">Basis Aturan</h3>
-            <span class="material-symbols-outlined text-green-600">account_tree</span>
+    <div class="bg-white p-8 rounded-2xl shadow-sm border border-gray-100 hover:shadow-md transition-shadow">
+        <div class="flex justify-between items-start mb-6">
+            <div class="p-3 bg-orange-50 rounded-xl">
+                <span class="material-symbols-outlined text-orange-700">account_tree</span>
+            </div>
+            <span class="text-xs font-bold text-gray-400 uppercase tracking-wider">Basis Aturan</span>
         </div>
-        <p class="text-3xl font-bold text-gray-800"><?= $count_rules ?></p>
+        <p class="text-4xl font-black text-gray-900"><?= $count_rules ?></p>
     </div>
-    <div class="bg-white p-6 rounded-xl shadow-sm border border-gray-200">
-        <div class="flex justify-between items-start mb-4">
-            <h3 class="text-gray-500 text-sm font-semibold uppercase">Total Diagnosa</h3>
-            <span class="material-symbols-outlined text-green-600">history</span>
+    <div class="bg-white p-8 rounded-2xl shadow-sm border border-gray-100 hover:shadow-md transition-shadow">
+        <div class="flex justify-between items-start mb-6">
+            <div class="p-3 bg-purple-50 rounded-xl">
+                <span class="material-symbols-outlined text-purple-700">history</span>
+            </div>
+            <span class="text-xs font-bold text-gray-400 uppercase tracking-wider">Diagnosa</span>
         </div>
-        <p class="text-3xl font-bold text-gray-800"><?= $count_history ?></p>
+        <p class="text-4xl font-black text-gray-900"><?= $count_history ?></p>
     </div>
 </div>
 
-<div class="bg-white p-6 rounded-xl shadow-sm border border-gray-200">
-    <h3 class="text-lg font-bold text-gray-800 mb-4">Diagnosa Terbaru</h3>
-    <table class="w-full text-left border-collapse">
-        <thead>
-            <tr class="bg-gray-50">
-                <th class="p-3 text-sm font-semibold text-gray-600 border-b">Tanggal</th>
-                <th class="p-3 text-sm font-semibold text-gray-600 border-b">Nama Petani</th>
-                <th class="p-3 text-sm font-semibold text-gray-600 border-b">Hasil Penyakit</th>
-            </tr>
-        </thead>
+<div class="bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden">
+    <div class="p-6 border-b border-gray-50 flex justify-between items-center">
+        <h3 class="text-xl font-bold text-gray-900">Diagnosa Terbaru</h3>
+        <a href="manage_history.php" class="text-sm font-semibold text-green-700 hover:text-green-800">Lihat Semua</a>
+    </div>
+    <div class="overflow-x-auto">
+        <table class="w-full text-left border-collapse">
+            <thead>
+                <tr class="bg-gray-50/50">
+                    <th class="p-6 text-sm font-bold text-gray-500 uppercase tracking-wider">Tanggal</th>
+                    <th class="p-6 text-sm font-bold text-gray-500 uppercase tracking-wider">Nama Petani</th>
+                    <th class="p-6 text-sm font-bold text-gray-500 uppercase tracking-wider">Hasil Penyakit</th>
+                </tr>
+            </thead>
         <tbody>
             <?php
             $stmt = $pdo->query("SELECT h.*, d.name as disease_name FROM diagnosis_history h LEFT JOIN diseases d ON h.disease_id = d.id ORDER BY h.diagnosis_date DESC LIMIT 5");
             while ($row = $stmt->fetch()):
             ?>
-            <tr class="hover:bg-gray-50 transition">
-                <td class="p-3 text-sm text-gray-600 border-b"><?= date('d M Y H:i', strtotime($row['diagnosis_date'])) ?></td>
-                <td class="p-3 text-sm text-gray-800 font-medium border-b"><?= htmlspecialchars($row['farmer_name']) ?></td>
-                <td class="p-3 text-sm border-b">
-                    <span class="<?= $row['disease_name'] ? 'text-green-700 font-semibold' : 'text-gray-500 italic' ?>">
-                        <?= $row['disease_name'] ?? 'Tidak Terdeteksi' ?>
-                    </span>
+            <tr class="hover:bg-gray-50 transition-colors">
+                <td class="p-6 text-sm text-gray-500"><?= date('d M Y H:i', strtotime($row['diagnosis_date'])) ?></td>
+                <td class="p-6 text-sm text-gray-900 font-bold"><?= htmlspecialchars($row['farmer_name']) ?></td>
+                <td class="p-6 text-sm">
+                    <?php if($row['disease_name']): ?>
+                        <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-bold bg-green-100 text-green-800">
+                            <?= htmlspecialchars($row['disease_name']) ?>
+                        </span>
+                    <?php else: ?>
+                        <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-gray-100 text-gray-600">
+                            Tidak Terdeteksi
+                        </span>
+                    <?php endif; ?>
                 </td>
             </tr>
             <?php endwhile; ?>

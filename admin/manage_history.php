@@ -20,39 +20,43 @@ $history = $stmt->fetchAll();
 ?>
 
 <div class="mb-8">
-    <h2 class="text-2xl font-bold text-green-900">Riwayat Diagnosa</h2>
-    <p class="text-gray-600">Daftar lengkap hasil diagnosa yang dilakukan oleh pengguna.</p>
+    <h2 class="text-3xl font-extrabold text-gray-900 tracking-tight">Riwayat Diagnosa</h2>
+    <p class="text-gray-500 mt-1">Daftar lengkap hasil diagnosa yang dilakukan oleh pengguna.</p>
 </div>
 
-<div class="bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden">
+<div class="bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden">
     <div class="overflow-x-auto">
         <table class="w-full text-left border-collapse">
             <thead>
-                <tr class="bg-gray-50">
-                    <th class="p-4 text-sm font-semibold text-gray-600 border-b">Tanggal</th>
-                    <th class="p-4 text-sm font-semibold text-gray-600 border-b">Nama Petani</th>
-                    <th class="p-4 text-sm font-semibold text-gray-600 border-b">Hasil Penyakit</th>
-                    <th class="p-4 text-sm font-semibold text-gray-600 border-b">Gejala</th>
-                    <th class="p-4 text-sm font-semibold text-gray-600 border-b text-center">Aksi</th>
+                <tr class="bg-gray-50/50">
+                    <th class="p-6 text-sm font-bold text-gray-500 uppercase tracking-wider">Tanggal</th>
+                    <th class="p-6 text-sm font-bold text-gray-500 uppercase tracking-wider">Nama Petani</th>
+                    <th class="p-6 text-sm font-bold text-gray-500 uppercase tracking-wider">Hasil Penyakit</th>
+                    <th class="p-6 text-sm font-bold text-gray-500 uppercase tracking-wider">Gejala</th>
+                    <th class="p-6 text-sm font-bold text-gray-500 uppercase tracking-wider text-center">Aksi</th>
                 </tr>
             </thead>
             <tbody>
                 <?php foreach ($history as $h): ?>
-                <tr class="hover:bg-gray-50 transition border-b border-gray-100 last:border-0">
-                    <td class="p-4 text-sm text-gray-500 whitespace-nowrap">
+                <tr class="hover:bg-gray-50 transition-colors border-b border-gray-50 last:border-0">
+                    <td class="p-6 text-sm text-gray-500 whitespace-nowrap">
                         <?= date('d/m/Y H:i', strtotime($h['diagnosis_date'])) ?>
                     </td>
-                    <td class="p-4 text-sm font-bold text-gray-800">
+                    <td class="p-6 text-sm font-bold text-gray-900">
                         <?= htmlspecialchars($h['farmer_name']) ?>
                     </td>
-                    <td class="p-4 text-sm">
+                    <td class="p-6 text-sm">
                         <?php if ($h['disease_name']): ?>
-                            <span class="text-green-700 font-semibold"><?= htmlspecialchars($h['disease_name']) ?></span>
+                            <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-bold bg-green-100 text-green-800">
+                                <?= htmlspecialchars($h['disease_name']) ?>
+                            </span>
                         <?php else: ?>
-                            <span class="text-gray-400 italic">Tidak Terdeteksi</span>
+                            <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-gray-100 text-gray-600">
+                                Tidak Terdeteksi
+                            </span>
                         <?php endif; ?>
                     </td>
-                    <td class="p-4 text-sm text-gray-600">
+                    <td class="p-6 text-sm text-gray-600">
                         <?php
                         $s_ids = json_decode($h['selected_symptoms'], true);
                         if ($s_ids) {
@@ -66,8 +70,8 @@ $history = $stmt->fetchAll();
                         }
                         ?>
                     </td>
-                    <td class="p-4 text-sm text-center">
-                        <a href="?delete=<?= $h['id'] ?>" class="text-red-600 hover:text-red-800 p-1" onclick="return confirm('Hapus riwayat ini?')">
+                    <td class="p-6 text-sm text-center">
+                        <a href="?delete=<?= $h['id'] ?>" class="inline-flex p-2 text-red-600 hover:bg-red-50 rounded-lg transition-colors" onclick="return confirm('Hapus riwayat ini?')">
                             <span class="material-symbols-outlined">delete</span>
                         </a>
                     </td>

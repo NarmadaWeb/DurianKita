@@ -40,18 +40,16 @@ if (isset($_GET['edit'])) {
 $csrf_token = generate_csrf_token();
 ?>
 
-<div class="mb-8 flex justify-between items-center">
-    <div>
-        <h2 class="text-2xl font-bold text-green-900">Kelola Gejala</h2>
-        <p class="text-gray-600">Tambah, ubah, atau hapus data gejala penyakit durian.</p>
-    </div>
+<div class="mb-8">
+    <h2 class="text-3xl font-extrabold text-gray-900 tracking-tight">Kelola Gejala</h2>
+    <p class="text-gray-500 mt-1">Tambah, ubah, atau hapus data gejala penyakit durian.</p>
 </div>
 
 <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
     <!-- Form Section -->
     <div class="lg:col-span-1">
-        <div class="bg-white p-6 rounded-xl shadow-sm border border-gray-200 sticky top-8">
-            <h3 class="text-lg font-bold text-gray-800 mb-4"><?= $edit_symptom ? 'Edit Gejala' : 'Tambah Gejala Baru' ?></h3>
+        <div class="bg-white p-8 rounded-2xl shadow-sm border border-gray-100 sticky top-8">
+            <h3 class="text-xl font-bold text-gray-900 mb-6"><?= $edit_symptom ? 'Edit Gejala' : 'Tambah Gejala Baru' ?></h3>
             <form action="" method="POST">
                 <input type="hidden" name="csrf_token" value="<?= $csrf_token ?>">
                 <?php if ($edit_symptom): ?>
@@ -89,14 +87,14 @@ $csrf_token = generate_csrf_token();
 
     <!-- Table Section -->
     <div class="lg:col-span-2">
-        <div class="bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden">
+        <div class="bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden">
             <table class="w-full text-left border-collapse">
                 <thead>
-                    <tr class="bg-gray-50">
-                        <th class="p-4 text-sm font-semibold text-gray-600 border-b w-16 text-center">ID</th>
-                        <th class="p-4 text-sm font-semibold text-gray-600 border-b">Nama Gejala</th>
-                        <th class="p-4 text-sm font-semibold text-gray-600 border-b">Kategori</th>
-                        <th class="p-4 text-sm font-semibold text-gray-600 border-b text-center">Aksi</th>
+                    <tr class="bg-gray-50/50">
+                        <th class="p-6 text-sm font-bold text-gray-500 uppercase tracking-wider text-center w-16">ID</th>
+                        <th class="p-6 text-sm font-bold text-gray-500 uppercase tracking-wider">Nama Gejala</th>
+                        <th class="p-6 text-sm font-bold text-gray-500 uppercase tracking-wider">Kategori</th>
+                        <th class="p-6 text-sm font-bold text-gray-500 uppercase tracking-wider text-center">Aksi</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -104,18 +102,20 @@ $csrf_token = generate_csrf_token();
                     $stmt = $pdo->query("SELECT * FROM symptoms ORDER BY category, id DESC");
                     while ($row = $stmt->fetch()):
                     ?>
-                    <tr class="hover:bg-gray-50 transition">
-                        <td class="p-4 text-sm text-gray-600 border-b text-center"><?= $row['id'] ?></td>
-                        <td class="p-4 text-sm text-gray-800 font-medium border-b"><?= htmlspecialchars($row['name']) ?></td>
-                        <td class="p-4 text-sm text-gray-600 border-b">
-                            <span class="px-2 py-1 bg-gray-100 rounded text-xs"><?= $row['category'] ?: '-' ?></span>
+                    <tr class="hover:bg-gray-50 transition-colors border-b border-gray-50 last:border-0">
+                        <td class="p-6 text-sm text-gray-500 text-center font-mono"><?= $row['id'] ?></td>
+                        <td class="p-6 text-sm text-gray-900 font-medium"><?= htmlspecialchars($row['name']) ?></td>
+                        <td class="p-6 text-sm">
+                            <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-gray-100 text-gray-800">
+                                <?= $row['category'] ?: 'Uncategorized' ?>
+                            </span>
                         </td>
-                        <td class="p-4 text-sm border-b text-center">
+                        <td class="p-6 text-sm text-center">
                             <div class="flex justify-center gap-2">
-                                <a href="?edit=<?= $row['id'] ?>" class="text-blue-600 hover:text-blue-800 p-1">
+                                <a href="?edit=<?= $row['id'] ?>" class="inline-flex p-2 text-blue-600 hover:bg-blue-50 rounded-lg transition-colors">
                                     <span class="material-symbols-outlined">edit</span>
                                 </a>
-                                <a href="?delete=<?= $row['id'] ?>" class="text-red-600 hover:text-red-800 p-1" onclick="return confirm('Yakin ingin menghapus gejala ini?')">
+                                <a href="?delete=<?= $row['id'] ?>" class="inline-flex p-2 text-red-600 hover:bg-red-50 rounded-lg transition-colors" onclick="return confirm('Yakin ingin menghapus gejala ini?')">
                                     <span class="material-symbols-outlined">delete</span>
                                 </a>
                             </div>

@@ -556,6 +556,45 @@ footer {
     margin-top: 1.5rem;
 }
 
+.result-detail-card {
+    background-color: white;
+    padding: 1.5rem;
+    border-radius: 1.25rem;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+    border: 1px solid var(--gray-100);
+    transition: transform 0.2s;
+}
+
+.result-detail-card:hover {
+    transform: translateY(-4px);
+}
+
+.detail-icon {
+    width: 3rem;
+    height: 3rem;
+    border-radius: 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 1rem;
+}
+
+.detail-icon-prevention {
+    background-color: #dcfce7;
+    color: #166534;
+}
+
+.detail-icon-maintenance {
+    background-color: #fef9c3;
+    color: #854d0e;
+}
+
+.detail-content {
+    color: var(--gray-600);
+    line-height: 1.8;
+    font-size: 1.05rem;
+}
+
 .sidebar-card {
     background-color: white;
     border-radius: 1.5rem;
@@ -667,6 +706,86 @@ td {
 
 tr:last-child td {
     border-bottom: 0;
+}
+
+/* Print View */
+@media print {
+    nav, footer, .sidebar-card, button, .nav-links, .nav-logo + div {
+        display: none !important;
+    }
+
+    body {
+        background-color: white !important;
+        color: black !important;
+        font-family: 'Inter', serif !important;
+        padding: 0 !important;
+        margin: 0 !important;
+    }
+
+    .container {
+        max-width: 100% !important;
+        padding: 0 !important;
+        margin: 0 !important;
+    }
+
+    .disease-card, .card, .result-detail-card {
+        box-shadow: none !important;
+        border: 1px solid #eee !important;
+        break-inside: avoid !important;
+    }
+
+    main {
+        padding: 0 !important;
+        margin: 0 !important;
+    }
+
+    header.mb-12 {
+        margin-bottom: 2rem !important;
+        border-bottom: 2px solid var(--primary);
+        padding-bottom: 1rem !important;
+    }
+
+    .section-title {
+        color: black !important;
+        margin: 0 !important;
+    }
+
+    .result-grid {
+        display: block !important;
+    }
+
+    .disease-card {
+        border: 2px solid black !important;
+        padding: 2rem !important;
+    }
+
+    .badge {
+        border: 1px solid black !important;
+        color: black !important;
+        background: none !important;
+    }
+
+    .solution-box {
+        background: #f9f9f9 !important;
+        border: 1px solid #ccc !important;
+    }
+
+    .detail-icon {
+        display: none !important;
+    }
+
+    @page {
+        margin: 2cm;
+    }
+
+    body::before {
+        content: "LAPORAN DIAGNOSIS DURIANCARE";
+        display: block;
+        text-align: center;
+        font-weight: bold;
+        font-size: 1.5rem;
+        margin-bottom: 2rem;
+    }
 }
 
 /* Admin Sidebar */
