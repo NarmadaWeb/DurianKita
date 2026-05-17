@@ -36,15 +36,15 @@ $csrf_token = generate_csrf_token();
 ?>
 
 <div class="mb-8">
-    <h2 class="text-2xl font-bold text-green-900">Basis Aturan (Rule Management)</h2>
-    <p class="text-gray-600">Hubungkan gejala-gejala dengan penyakit untuk logika Forward Chaining.</p>
+    <h2 class="text-3xl font-extrabold text-gray-900 tracking-tight">Basis Aturan</h2>
+    <p class="text-gray-500 mt-1">Hubungkan gejala-gejala dengan penyakit untuk logika Forward Chaining.</p>
 </div>
 
 <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
     <!-- Form Section -->
     <div class="lg:col-span-1">
-        <div class="bg-white p-6 rounded-xl shadow-sm border border-gray-200 sticky top-8">
-            <h3 class="text-lg font-bold text-gray-800 mb-4"><?= $edit_disease_id ? 'Edit Aturan' : 'Tambah Aturan' ?></h3>
+        <div class="bg-white p-8 rounded-2xl shadow-sm border border-gray-100 sticky top-8">
+            <h3 class="text-xl font-bold text-gray-900 mb-6"><?= $edit_disease_id ? 'Edit Aturan' : 'Tambah Aturan' ?></h3>
             <form action="" method="POST">
                 <input type="hidden" name="csrf_token" value="<?= $csrf_token ?>">
 
@@ -100,13 +100,13 @@ $csrf_token = generate_csrf_token();
 
     <!-- Table Section -->
     <div class="lg:col-span-2">
-        <div class="bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden">
+        <div class="bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden">
             <table class="w-full text-left border-collapse">
                 <thead>
-                    <tr class="bg-gray-50">
-                        <th class="p-4 text-sm font-semibold text-gray-600 border-b">Penyakit</th>
-                        <th class="p-4 text-sm font-semibold text-gray-600 border-b">Gejala-gejala</th>
-                        <th class="p-4 text-sm font-semibold text-gray-600 border-b text-center">Aksi</th>
+                    <tr class="bg-gray-50/50">
+                        <th class="p-6 text-sm font-bold text-gray-500 uppercase tracking-wider">Penyakit</th>
+                        <th class="p-6 text-sm font-bold text-gray-500 uppercase tracking-wider">Gejala-gejala</th>
+                        <th class="p-6 text-sm font-bold text-gray-500 uppercase tracking-wider text-center">Aksi</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -121,17 +121,15 @@ $csrf_token = generate_csrf_token();
                     ");
                     while ($row = $stmt->fetch()):
                     ?>
-                    <tr class="hover:bg-gray-50 transition">
-                        <td class="p-4 text-sm text-gray-800 font-bold border-b"><?= htmlspecialchars($row['name']) ?></td>
-                        <td class="p-4 text-sm text-gray-600 border-b">
+                    <tr class="hover:bg-gray-50 transition-colors border-b border-gray-50 last:border-0">
+                        <td class="p-6 text-sm text-gray-900 font-bold"><?= htmlspecialchars($row['name']) ?></td>
+                        <td class="p-6 text-sm text-gray-600">
                             <div class="line-clamp-2"><?= htmlspecialchars($row['symptom_list']) ?></div>
                         </td>
-                        <td class="p-4 text-sm border-b text-center">
-                            <div class="flex justify-center gap-2">
-                                <a href="?edit=<?= $row['id'] ?>" class="text-blue-600 hover:text-blue-800 p-1">
-                                    <span class="material-symbols-outlined">edit</span>
-                                </a>
-                            </div>
+                        <td class="p-6 text-sm text-center">
+                            <a href="?edit=<?= $row['id'] ?>" class="inline-flex p-2 text-blue-600 hover:bg-blue-50 rounded-lg transition-colors">
+                                <span class="material-symbols-outlined">edit</span>
+                            </a>
                         </td>
                     </tr>
                     <?php endwhile; ?>
